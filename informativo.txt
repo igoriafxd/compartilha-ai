@@ -1,39 +1,27 @@
-cd frontend
+index-CMC-qC0w.js:54 Mixed Content: The page at 'https://compartilha-ai.vercel.app/' was loaded over HTTPS, but requested an insecure resource 'http://192.168.1.103:8001/api/calcular-totais/divisao_d6fe017…'. This request has been blocked; the content must be served over HTTPS.
+(anônimo)	@	index-CMC-qC0w.js:54
+(anônimo)	@	index-CMC-qC0w.js:54
+gn	@	index-CMC-qC0w.js:48
+Lr	@	index-CMC-qC0w.js:48
+He	@	index-CMC-qC0w.js:48
+Lr	@	index-CMC-qC0w.js:48
+He	@	index-CMC-qC0w.js:48
+Lr	@	index-CMC-qC0w.js:48
+He	@	index-CMC-qC0w.js:48
+Lr	@	index-CMC-qC0w.js:48
+fd	@	index-CMC-qC0w.js:48
+(anônimo)	@	index-CMC-qC0w.js:48
+Wt	@	index-CMC-qC0w.js:25
 
-# Cria arquivo .env.production
-@"
-VITE_API_URL=https://compartilha-ai-backend.onrender.com
-"@ | Out-File -Encoding utf8 .env.production
-```
-
-Ou cria manualmente:
-```
-VITE_API_URL=https://compartilha-ai-backend.onrender.com
-```
-
----
-
-### **1.2 Atualizar o `.gitignore` (não commitar .env local)**
-
-**Arquivo: `.gitignore` (na raiz do projeto)**
-```
-# Python
-__pycache__/
-*.pyc
-.env
-venv/
-.venv/
-backend/.env
-
-# Node
-node_modules/
-dist/
-.vite/
-
-# Environment (só commita .env.production)
-frontend/.env
-frontend/.env.local
-
-# Outros
-.DS_Store
-*.log
+index-CMC-qC0w.js:54 TypeError: Failed to fetch
+    at index-CMC-qC0w.js:54:19590
+    at index-CMC-qC0w.js:54:19800
+    at gn (index-CMC-qC0w.js:48:92664)
+    at Lr (index-CMC-qC0w.js:48:107892)
+    at He (index-CMC-qC0w.js:48:107776)
+    at Lr (index-CMC-qC0w.js:48:107872)
+    at He (index-CMC-qC0w.js:48:107776)
+    at Lr (index-CMC-qC0w.js:48:108658)
+    at He (index-CMC-qC0w.js:48:107776)
+    at Lr (index-CMC-qC0w.js:48:107938)
+﻿

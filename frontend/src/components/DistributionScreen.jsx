@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import api from '../services/api'; // Importa a instância do axios
 import ItemCard from './ItemCard';
 import PersonCard from './PersonCard';
 import ModalDistribuir from './ModalDistribuir';
@@ -24,9 +25,9 @@ export default function DistributionScreen({ initialDivisionData, onGoBack, onFi
   const fetchTotals = useCallback(async () => {
     setIsLoadingTotals(true);
     try {
-      const response = await fetch(`http://192.168.1.103:8001/api/calcular-totais/${divisionData.id}`);
-      if (!response.ok) throw new Error("Falha ao buscar totais");
-      const data = await response.json();
+      const response = await api.get(`/api/calcular-totais/${divisionData.id}`);
+      if (response.status !== 200) throw new Error("Falha ao buscar totais");
+      const data = response.data;
       setTotais(data);
     } catch (error) {
       console.error(error);
@@ -47,16 +48,12 @@ export default function DistributionScreen({ initialDivisionData, onGoBack, onFi
 
       if (taxaAtual !== divisionData.taxa_servico_percentual || descontoAtual !== divisionData.desconto_valor) {
         try {
-          const response = await fetch(`http://192.168.1.103:8001/api/divisao/${divisionData.id}/config`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              taxa_servico_percentual: taxaAtual,
-              desconto_valor: descontoAtual,
-            }),
+          const response = await api.put(`/api/divisao/${divisionData.id}/config`, {
+            taxa_servico_percentual: taxaAtual,
+            desconto_valor: descontoAtual,
           });
-          if (!response.ok) throw new Error("Falha ao atualizar configuração");
-          const updatedDivision = await response.json();
+          if (response.status !== 200) throw new Error("Falha ao atualizar configuração");
+          const updatedDivision = response.data;
           setDivisionData(updatedDivision);
         } catch (error) {
           console.error(error);
@@ -70,13 +67,12 @@ export default function DistributionScreen({ initialDivisionData, onGoBack, onFi
 
   const handleConfirmDistribuicao = async (itemId, distribuicao) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/distribuir-item/${divisionData.id}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ item_id: itemId, distribuicao }),
+      const response = await api.post(`/api/distribuir-item/${divisionData.id}`, {
+        item_id: itemId,
+        distribuicao,
       });
-      if (!response.ok) throw new Error("Falha ao distribuir item");
-      const updatedDivision = await response.json();
+      if (response.status !== 200) throw new Error("Falha ao distribuir item");
+      const updatedDivision = response.data;
       setDivisionData(updatedDivision);
       setItemParaDistribuir(null);
     } catch (error) {
@@ -99,11 +95,9 @@ export default function DistributionScreen({ initialDivisionData, onGoBack, onFi
   const handleDeleteItem = async (itemId) => {
     if (window.confirm("Tem certeza que deseja excluir este item?")) {
       try {
-        const response = await fetch(`http://192.168.1.103:8001/api/divisao/${divisionData.id}/item/${itemId}`, {
-          method: 'DELETE',
-        });
-        if (!response.ok) throw new Error("Falha ao excluir item");
-        const updatedDivision = await response.json();
+        const response = await api.delete(`/api/divisao/${divisionData.id}/item/${itemId}`);
+        if (response.status !== 200) throw new Error("Falha ao excluir item");
+        const updatedDivision = response.data;
         setDivisionData(updatedDivision);
       } catch (error) {
         console.error(error);
@@ -112,20 +106,18 @@ export default function DistributionScreen({ initialDivisionData, onGoBack, onFi
   };
 
   const handleConfirmGerenciarItem = async (itemData) => {
-    const url = itemParaEditar
-      ? `${import.meta.env.VITE_API_URL}/api/divisao/${divisionData.id}/item/${itemParaEditar.id}` // URL para Editar
-      : `${import.meta.env.VITE_API_URL}/api/divisao/${divisionData.id}/item`; // URL para Adicionar
+    const isEditing = !!itemParaEditar;
+    const url = isEditing
+      ? `/api/divisao/${divisionData.id}/item/${itemParaEditar.id}` // URL para Editar
+      : `/api/divisao/${divisionData.id}/item`; // URL para Adicionar
 
-    const method = itemParaEditar ? 'PUT' : 'POST';
+    const method = isEditing ? 'put' : 'post';
 
     try {
-      const response = await fetch(url, {
-        method,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(itemData),
-      });
-      if (!response.ok) throw new Error(`Falha ao ${method === 'POST' ? 'adicionar' : 'editar'} item`);
-      const updatedDivision = await response.json();
+      const response = await api[method](url, itemData);
+      if (response.status !== 200) throw new Error(`Falha ao ${isEditing ? 'editar' : 'adicionar'} item`);
+      
+      const updatedDivision = response.data;
       setDivisionData(updatedDivision);
       setIsItemModalOpen(false); // Fecha o modal
     } catch (error) {
