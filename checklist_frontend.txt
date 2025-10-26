@@ -1,0 +1,63 @@
+# Checklist Frontend - Compartilha AI 📋
+
+O objetivo deste checklist é rastrear a implementação da interface do usuário (UI) e a integração com a API.
+
+---
+## FASES ANTERIORES (Concluídas)
+- [x] **Estrutura Inicial:** Setup do projeto com React, Vite e TailwindCSS.
+- [x] **Tela de Upload:** Componente para enviar a imagem da comanda e receber os itens da IA.
+- [x] **Tela de Nomes:** Componente para inserir os nomes dos participantes e criar a divisão.
+- [x] **Tela de Distribuição:** Layout principal com cards de itens e pessoas, e modal de distribuição.
+
+---
+## FASE ATUAL: Interface de Edição e Finalização (Concluída)
+
+**🎯 Objetivo:** Implementar na interface do usuário os recursos de edição da conta, taxa customizável, descontos e um fluxo de finalização.
+
+### 1. Gerenciamento de Itens na Tela de Distribuição
+- [x] **Adicionar Item:**
+    - [x] Criar botão "Adicionar Item".
+    - [x] Criar componente de modal (`ModalGerenciarItem.jsx`).
+    - [x] Implementar a chamada ao endpoint `POST /api/divisao/{divisao_id}/item`.
+- [x] **Editar Item:**
+    - [x] Adicionar ícone de "editar" no `ItemCard.jsx`.
+    - [x] Reutilizar modal de edição.
+    - [x] Implementar a chamada ao endpoint `PUT /api/divisao/{divisao_id}/item/{item_id}`.
+- [x] **Excluir Item:**
+    - [x] Adicionar ícone de "excluir" no `ItemCard.jsx`.
+    - [x] Implementar popup de confirmação.
+    - [x] Implementar a chamada ao endpoint `DELETE /api/divisao/{divisao_id}/item/{item_id}`.
+
+### 2. Configurações da Conta (Taxa e Desconto)
+- [x] **Criar Componente de Configuração:**
+    - [x] Adicionar inputs para taxa de serviço e desconto na tela de distribuição.
+- [x] **Integrar com a API:**
+    - [x] Chamar o endpoint `PUT /api/divisao/{divisao_id}/config` quando os valores mudam.
+    - [x] Usar "debounce" para otimizar as chamadas à API.
+
+### 3. Gerenciamento de Pessoas
+- [x] **Adicionar Pessoa:**
+    - [x] Criar botão "+ Adicionar" na seção de pessoas.
+    - [x] Criar o modal `ModalAdicionarPessoa.jsx`.
+    - [x] Implementar a chamada ao endpoint `POST /api/divisao/{divisao_id}/pessoa`.
+
+### 4. Fluxo de Finalização
+- [x] **Tela de Resumo:**
+    - [x] Criar o componente `SummaryScreen.jsx`.
+    - [x] Adicionar botão "Finalizar e Ver Resumo" na tela de distribuição.
+    - [x] Implementar a lógica de navegação no `App.jsx`.
+- [x] **Compartilhamento:**
+    - [x] Implementar a função de "Copiar e Compartilhar" o resultado.
+
+### 5. Atualização da Exibição de Totais
+- [x] **Refatorar `PersonCard.jsx`:**
+    - [x] Exibir o valor do desconto que a pessoa recebeu.
+    - [x] Garantir que o total final reflete todos os novos cálculos.
+
+### 6. Correção de Bugs
+- [x] Corrigir bug de distribuição em itens recém-adicionados.
+
+---
+## PRÓXIMAS FASES (Futuro)
+- [ ] **Melhorias de UI/UX:** Adicionar animações, transições e melhorar a responsividade.
+- [ ] **Testes Automatizados:** Escrever testes para garantir que as funções de cálculo não quebrem.

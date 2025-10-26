@@ -1,0 +1,39 @@
+# Checklist Backend - Compartilha AI 📋
+
+O objetivo deste checklist é rastrear as funcionalidades implementadas no servidor (API).
+
+---
+## FASES ANTERIORES (Concluídas)
+- [x] **Prova de Conceito:** Validação da API do Gemini.
+- [x] **Extração com IA:** Implementação do serviço que lê a imagem da comanda.
+- [x] **API Inicial:** Criação dos endpoints de scan e de criação de divisão.
+- [x] **Lógica de Divisão:** Implementação da distribuição de itens e cálculo inicial de totais.
+
+---
+## FASE ATUAL: Flexibilidade e Edição da Conta (Concluída)
+
+**🎯 Objetivo:** Tornar a API robusta, permitindo que o usuário edite a conta após o scan da IA e tenha controle sobre taxas e descontos.
+
+### 1. Atualização dos Modelos de Dados (`schemas.py`)
+- [x] Adicionar campo `desconto_valor` ao schema `Divisao`.
+- [x] Criar schema `ConfigDivisao` para receber atualizações de taxa e desconto.
+- [x] Criar schema `ItemPayload` para receber dados de novos itens ou de edições.
+- [x] Criar schema `AddPessoaRequest` para adicionar novas pessoas.
+
+### 2. Implementação dos Endpoints de Edição (`main.py`)
+- [x] Criar endpoint `PUT /api/divisao/{divisao_id}/config` para atualizar taxa e desconto.
+- [x] Criar endpoint `POST /api/divisao/{divisao_id}/item` para adicionar um novo item à divisão.
+- [x] Criar endpoint `PUT /api/divisao/{divisao_id}/item/{item_id}` para editar um item existente.
+- [x] Criar endpoint `DELETE /api/divisao/{divisao_id}/item/{item_id}` para remover um item.
+- [x] Criar endpoint `POST /api/divisao/{divisao_id}/pessoa` para adicionar uma nova pessoa.
+
+### 3. Lógica de Cálculo Avançada (`main.py`)
+- [x] Refatorar o endpoint `GET /api/calcular-totais/{divisao_id}`.
+- [x] Implementar a lógica de desconto proporcional.
+- [x] Garantir que a ordem dos cálculos seja: (Subtotal dos Itens - Desconto) + Taxa de Serviço.
+- [x] Distribuir todos os custos e benefícios (taxa, desconto) de forma proporcional ao consumo de cada pessoa.
+
+---
+## PRÓXIMAS FASES (Futuro)
+- [ ] **Persistência de Dados:** Salvar as divisões em um banco de dados para que não se percam.
+- [ ] **Autenticação:** Adicionar um sistema de login se o app se tornar multi-usuário.

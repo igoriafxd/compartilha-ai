@@ -1,0 +1,109 @@
+Endpoints da API
+pythonPOST /api/scan-comanda
+Body: { "image": "base64_string" }
+Response: {
+  "success": true,
+  "itens": [
+    {
+      "id": "item_1",
+      "nome": "Cerveja Brahma",
+      "quantidade": 4,
+      "valor_unitario": 8.50,
+      "valor_total": 34.00,
+      "emoji": "🍺"
+    }
+  ],
+  "subtotal": 260.00,
+  "taxa_servico": 26.00,
+  "total": 286.00
+}
+
+POST /api/criar-divisao
+Body: {
+  "conta_id": "abc123",
+  "pessoas": ["João", "Maria"]
+}
+
+POST /api/distribuir-item
+Body: {
+  "divisao_id": "xyz789",
+  "item_id": "item_1",
+  "distribuicao": {
+    "joao": 2,
+    "maria": 1
+  }
+}
+
+GET /api/calcular-totais/{divisao_id}
+Response: {
+  "pessoas": [
+    {
+      "nome": "João",
+      "itens": [...],
+      "subtotal": 209.50,
+      "taxa": 15.60,
+      "total": 171.60,
+      "percentual": 60
+    }
+  ],
+  "progresso": {
+    "percentual_distribuido": 100,
+    "itens_restantes": 0
+  }
+}
+Estrutura de Dados
+python# Modelo da Conta
+{
+  "id": "uuid",
+  "timestamp": "2025-10-19T20:30:00",
+  "imagem_url": "s3://...",
+  "itens": [
+    {
+      "id": "uuid",
+      "nome": str,
+      "quantidade": int,
+      "valor_unitario": float,
+      "valor_total": float,
+      "emoji": str,
+      "categoria": str,  # bebida, comida, sobremesa
+      "distribuido": {
+        "pessoa_id": quantidade
+      }
+    }
+  ],
+  "subtotal": float,
+  "taxa_servico": float,
+  "total": float
+}
+
+# Modelo da Divisão
+{
+  "id": "uuid",
+  "conta_id": "uuid",
+  "pessoas": [
+    {
+      "id": "uuid",
+      "nome": str,
+      "avatar_color": str,  # cor do card
+      "itens_consumidos": [
+        {
+          "item_id": "uuid",
+          "quantidade": int,
+          "valor": float
+        }
+      ],
+      "subtotal": float,
+      "taxa_servico_proporcional": float,
+      "total": float,
+      "percentual_conta": int
+    }
+  ],
+  "status": "em_andamento" | "finalizada",
+  "progresso": {
+    "itens_distribuidos": int,
+    "itens_totais": int,
+    "percentual": int,
+    "valor_distribuido": float,
+    "valor_total": float
+  }
+}

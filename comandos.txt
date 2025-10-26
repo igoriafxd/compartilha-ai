@@ -1,0 +1,33 @@
+# Comandos para o Projeto Compartilha AI
+
+## Backend (API)
+
+O backend é uma API feita com FastAPI.
+
+1. **Navegue até a pasta raiz do projeto:**
+   cd compartilha-ai
+
+2. **(Opcional, se não estiver ativo) Ative o ambiente virtual:**
+   .\venv\Scripts\activate
+
+3. **Inicie o servidor da API (a partir da pasta 'compartilha-ai'):**
+   uvicorn backend.main:app --reload --host 192.168.1.103 --port 8001
+
+   *Observação: O comando agora é executado da pasta raiz para que as importações do Python funcionem corretamente.*
+
+---
+
+## Frontend (Interface do Usuário)
+
+O frontend é uma aplicação React criada com Vite.
+
+1. **Navegue até a pasta do frontend:**
+   cd compartilha-ai/frontend
+
+2. **(Se for a primeira vez) Instale as dependências:**
+   npm install
+
+3. **Inicie o servidor de desenvolvimento:**
+   npm run dev
+
+   *Observação: O servidor iniciará automaticamente no IP 192.168.1.103, permitindo o acesso de outros dispositivos na mesma rede.*
