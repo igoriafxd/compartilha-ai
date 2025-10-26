@@ -19,3 +19,6 @@ Pillow==12.0.0
 
 # Usado extensivamente pelo FastAPI para validação de dados (nossos Schemas).
 pydantic==2.12.3
+
+# Necessário para o FastAPI lidar com uploads de arquivos (formulários multipart).
+python-multipart==0.0.20
