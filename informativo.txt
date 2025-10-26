@@ -1,58 +1,13 @@
-🔴 ERRO IDENTIFICADO! Problema de Import Relativo
-
-❌ O PROBLEMA:
-python# No seu main.py (linha 20):
-from .services.ia_scanner import scan_receipt_to_json
-#    ↑ 
-#  Esse ponto causa o erro!
-Por quê?
-
-Imports relativos (.services) funcionam quando o código é um pacote Python
-Mas no Render, está rodando como script direto
-Python não sabe qual é o "parent package"
-
-
-✅ SOLUÇÃO: Mudar Imports Relativos para Absolutos
-Arquivo: backend/main.py
-ANTES (❌ ERRADO):
-pythonfrom .services.ia_scanner import scan_receipt_to_json
-from .schemas import ScanResponse, Item, CriarDivisaoRequest, Divisao
-DEPOIS (✅ CORRETO):
-pythonfrom services.ia_scanner import scan_receipt_to_json
-from schemas import ScanResponse, Item, CriarDivisaoRequest, Divisao
-Remove TODOS os pontos (.) dos imports!
-
-🔧 CORREÇÃO COMPLETA:
-1. Edita backend/main.py:
-Procura por todas as linhas que começam com from . e remove o ponto:
-python# ❌ ANTES:
-from .services.ia_scanner import scan_receipt_to_json
-from .schemas import ScanResponse, Item
-
-# ✅ DEPOIS:
-from services.ia_scanner import scan_receipt_to_json
-from schemas import ScanResponse, Item
-
-2. Verifica TODOS os arquivos que têm imports relativos:
-Arquivo: backend/services/ia_scanner.py
-Se tiver algo como:
-pythonfrom ..schemas import Item  # ❌ ERRADO
-Muda para:
-pythonfrom schemas import Item  # ✅ CORRETO
-
-3. Cria arquivo __init__.py (opcional, mas ajuda):
-powershellcd backend
-
-# Cria arquivos vazios para Python reconhecer como pacote
-New-Item -ItemType File -Path "__init__.py"
-New-Item -ItemType File -Path "services/__init__.py"
-Ou cria manualmente arquivos vazios chamados __init__.py em:
-
-backend/__init__.py
-backend/services/__init__.py
-
-
-🚀 DEPOIS DE CORRIGIR:
-powershell# 1. Testa local primeiro!
-cd backend
-uvicorn main:app --reload
+==> Cloning from https://github.com/igoriafxd/compartilha-ai
+==> Checking out commit e020a2b20077c7dc3ccef0b582f35899698655fe in branch main
+==> Installing Python version 3.13.4...
+==> Using Python version 3.13.4 (default)
+==> Docs on specifying a Python version: https://render.com/docs/python-version
+==> Using Poetry version 2.1.3 (default)
+==> Docs on specifying a Poetry version: https://render.com/docs/poetry-version
+==> Running build command 'pip install -r requirements.txt'...
+[notice] A new release of pip is available: 25.1.1 -> 25.3
+[notice] To update, run: pip install --upgrade pip
+ERROR: Could not open requirements file: [Errno 2] No such file or directory: 'requirements.txt'
+==> Build failed 😞
+==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
