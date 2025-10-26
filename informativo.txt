@@ -1,13 +1,58 @@
-Arquivo: frontend/src/services/api.js
+🔴 ERRO IDENTIFICADO! Problema de Import Relativo
+
+❌ O PROBLEMA:
+python# No seu main.py (linha 20):
+from .services.ia_scanner import scan_receipt_to_json
+#    ↑ 
+#  Esse ponto causa o erro!
+Por quê?
+
+Imports relativos (.services) funcionam quando o código é um pacote Python
+Mas no Render, está rodando como script direto
+Python não sabe qual é o "parent package"
 
 
-import axios from 'axios';
+✅ SOLUÇÃO: Mudar Imports Relativos para Absolutos
+Arquivo: backend/main.py
+ANTES (❌ ERRADO):
+pythonfrom .services.ia_scanner import scan_receipt_to_json
+from .schemas import ScanResponse, Item, CriarDivisaoRequest, Divisao
+DEPOIS (✅ CORRETO):
+pythonfrom services.ia_scanner import scan_receipt_to_json
+from schemas import ScanResponse, Item, CriarDivisaoRequest, Divisao
+Remove TODOS os pontos (.) dos imports!
 
-const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+🔧 CORREÇÃO COMPLETA:
+1. Edita backend/main.py:
+Procura por todas as linhas que começam com from . e remove o ponto:
+python# ❌ ANTES:
+from .services.ia_scanner import scan_receipt_to_json
+from .schemas import ScanResponse, Item
 
-export default api;
+# ✅ DEPOIS:
+from services.ia_scanner import scan_receipt_to_json
+from schemas import ScanResponse, Item
+
+2. Verifica TODOS os arquivos que têm imports relativos:
+Arquivo: backend/services/ia_scanner.py
+Se tiver algo como:
+pythonfrom ..schemas import Item  # ❌ ERRADO
+Muda para:
+pythonfrom schemas import Item  # ✅ CORRETO
+
+3. Cria arquivo __init__.py (opcional, mas ajuda):
+powershellcd backend
+
+# Cria arquivos vazios para Python reconhecer como pacote
+New-Item -ItemType File -Path "__init__.py"
+New-Item -ItemType File -Path "services/__init__.py"
+Ou cria manualmente arquivos vazios chamados __init__.py em:
+
+backend/__init__.py
+backend/services/__init__.py
+
+
+🚀 DEPOIS DE CORRIGIR:
+powershell# 1. Testa local primeiro!
+cd backend
+uvicorn main:app --reload
