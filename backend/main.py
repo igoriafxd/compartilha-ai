@@ -47,6 +47,8 @@ app.add_middleware(
         "http://localhost:5173",
         "http://192.168.1.103:5173",
         "https://compartilha-ai.vercel.app", # Placeholder para o futuro deploy
+        'https://www.iafxd.com',
+        'https://iafxd.com',
     ],
     allow_credentials=True,
     allow_methods=["*"], # Permite todos os métodos (GET, POST, PUT, DELETE)
