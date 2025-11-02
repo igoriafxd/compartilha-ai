@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import api from './services/api'; // 1. Importa o novo serviço de API
+import api from './services/api';
 import UploadScreen from './components/UploadScreen';
 import NomesDialog from './components/NomesDialog';
 import DistributionScreen from './components/DistributionScreen';
@@ -19,16 +19,19 @@ function App() {
     setShowNomesDialog(true);
   };
 
+  const handleManualStart = () => {
+    setScannedItems([]); // Inicia com uma lista de itens vazia
+    setShowNomesDialog(true);
+  };
+
   const handleCreateDivision = async (nomes) => {
     if (!scannedItems) return;
     setShowNomesDialog(false);
     try {
-      // 2. Substitui o `fetch` pelo `api.post`
       const response = await api.post('/api/criar-divisao', {
         itens: scannedItems,
         nomes_pessoas: nomes,
       });
-      // Com axios, os dados já vêm em `response.data`
       setDivisionData(response.data);
     } catch (error) {
       console.error("Erro ao criar divisão:", error);
@@ -39,6 +42,15 @@ function App() {
 
   const handleFinalize = (totais) => {
     setFinalTotals(totais);
+  };
+
+  // Função para atualizar o estado da divisão a partir do filho
+  const handleDivisionUpdate = (updatedDivisionData) => {
+    setDivisionData(updatedDivisionData);
+  };
+
+  const handleGoBackToDivision = () => {
+    setFinalTotals(null);
   };
 
   const handleReset = () => {
@@ -52,29 +64,36 @@ function App() {
   // --- LÓGICA DE RENDERIZAÇÃO ---
 
   if (finalTotals) {
-    return <SummaryScreen totais={finalTotals} onReset={handleReset} />;
+    return <SummaryScreen 
+              totais={finalTotals} 
+              divisionData={divisionData}
+              onReset={handleReset} 
+              onGoBack={handleGoBackToDivision} 
+            />;
   }
 
   if (divisionData) {
     return (
       <DistributionScreen
-        initialDivisionData={divisionData}
+        divisionData={divisionData}
+        onDivisionUpdate={handleDivisionUpdate}
         onGoBack={handleReset}
         onFinalize={handleFinalize}
       />
     );
   }
 
-  if (scannedItems) {
+  if (scannedItems !== null) {
     return (
       <>
-        <UploadScreen onScanComplete={() => {}} />
+        {/* Passamos uma função vazia para onScanComplete para desabilitá-la visualmente */}
+        <UploadScreen onScanComplete={() => {}} onManualStart={() => {}} />
         {showNomesDialog && <NomesDialog onConfirm={handleCreateDivision} onCancel={handleReset} />}
       </>
     );
   }
 
-  return <UploadScreen onScanComplete={handleScanComplete} />;
+  return <UploadScreen onScanComplete={handleScanComplete} onManualStart={handleManualStart} />;
 }
 
 export default App;

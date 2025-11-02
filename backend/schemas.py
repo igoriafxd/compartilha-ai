@@ -21,9 +21,9 @@ class Item(BaseModel):
     """
     id: str
     nome: str
-    quantidade: int
+    quantidade: float
     valor_unitario: float
-    atribuido_a: Dict[str, int] = {} # Ex: { "id_da_pessoa_1": 2 }
+    atribuido_a: Dict[str, float] = {} # Ex: { "id_da_pessoa_1": 2 }
 
 class Pessoa(BaseModel):
     """
@@ -65,7 +65,7 @@ class ScanResponse(BaseModel):
 class DistribuicaoItem(BaseModel):
     """ Define como um único item é distribuído para UMA pessoa. """
     pessoa_id: str
-    quantidade: int
+    quantidade: float
 
 class DistribuirItemRequest(BaseModel):
     """ O "formulário" que o frontend envia para distribuir UM item para VÁRIAS pessoas. """
@@ -81,7 +81,7 @@ class ItemPayload(BaseModel):
     pela URL da API (edição). Também não precisamos do `atribuido_a`.
     """
     nome: str
-    quantidade: int
+    quantidade: float
     valor_unitario: float
 
 class ConfigDivisao(BaseModel):
@@ -103,7 +103,7 @@ class AddPessoaRequest(BaseModel):
 class ItemConsumido(BaseModel):
     """ Representa um item (ou parte dele) consumido por uma pessoa no resumo final. """
     nome: str
-    quantidade: int
+    quantidade: float
     valor: float # O valor total para a quantidade que a pessoa consumiu
     desconto_aplicado: float # Quanto de desconto foi aplicado a este item para esta pessoa
 

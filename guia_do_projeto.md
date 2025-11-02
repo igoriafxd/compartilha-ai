@@ -271,4 +271,23 @@ export default function DistributionScreen({ initialDivisionData }) {
 
 ---
 
+## Parte 3: O Restaurante Aberto ao Público (Deploy)
+
+"Deploy" é o ato de pegar o código que funciona na nossa máquina e publicá-lo na internet para que qualquer pessoa possa acessar.
+
+O projeto utiliza um pipeline de CI/CD (Integração e Entrega Contínua) para deploys automáticos a partir da branch `main` do GitHub.
+
+### 3.1. Backend (A Cozinha)
+- **Plataforma:** **Render**
+- **URL da API:** `https://compartilha-ai-backend.onrender.com`
+- **Status:** Online e operacional. O Render monitora o repositório e, a cada `push` na branch `main`, ele reinstala as dependências do `requirements.txt` e reinicia o servidor com o comando do `Procfile`.
+
+### 3.2. Frontend (O Salão)
+- **Plataforma:** **Vercel**
+- **URL da Aplicação:** `https://compartilha-ai.vercel.app/`
+- **Status:** Online e operacional. A Vercel também monitora o repositório. A cada `push`, ela executa o processo de "build" do React (otimizando os arquivos para produção) e os distribui globalmente.
+- **Última correção importante:** `fix: Corrige erro de Mixed Content na tela de distribuição`. Esta correção foi crucial para garantir que a comunicação entre o frontend (em HTTPS) e o backend (em HTTPS) funcionasse corretamente no ambiente de produção.
+
+---
+
 Este guia é o ponto de partida. A melhor forma de aprender é ler o código dos arquivos, ver os comentários e tentar fazer pequenas mudanças. Quebre, conserte, experimente. É assim que nos tornamos desenvolvedores. Boa sorte!

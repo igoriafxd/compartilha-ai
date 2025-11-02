@@ -1,33 +1,34 @@
-# Comandos para o Projeto Compartilha AI
+# === BACKEND (API) ===
 
-## Backend (API)
+# Para rodar o servidor da API localmente:
 
-O backend é uma API feita com FastAPI.
+# 1. Abra um terminal na pasta raiz do projeto (compartilha-ai).
 
-1. **Navegue até a pasta raiz do projeto:**
-   cd compartilha-ai
+# 2. Ative o ambiente virtual (venv). No Windows:
+.\venv\Scripts\activate
 
-2. **(Opcional, se não estiver ativo) Ative o ambiente virtual:**
-   .\venv\Scripts\activate
+# 3. Inicie o servidor com Uvicorn:
+uvicorn backend.main:app --reload --host 0.0.0.0 --port 8001
 
-3. **Inicie o servidor da API (a partir da pasta 'compartilha-ai'):**
-   uvicorn backend.main:app --reload --host 192.168.1.103 --port 8001
+# O que cada parte faz:
+# --reload: O servidor reinicia automaticamente quando você altera o código.
+# --host 0.0.0.0: Permite que o servidor seja acessado de outros dispositivos na sua rede (como seu celular).
+# --port 8001: Define a porta em que o servidor vai rodar.
 
-   *Observação: O comando agora é executado da pasta raiz para que as importações do Python funcionem corretamente.*
+# ---
+# Para desativar o ambiente virtual depois que terminar:
+deactivate
 
----
 
-## Frontend (Interface do Usuário)
+# === FRONTEND (React App) ===
 
-O frontend é uma aplicação React criada com Vite.
+# Para rodar a aplicação frontend localmente:
 
-1. **Navegue até a pasta do frontend:**
-   cd compartilha-ai/frontend
+# 1. Abra um segundo terminal e navegue até a pasta do frontend:
+cd frontend
 
-2. **(Se for a primeira vez) Instale as dependências:**
-   npm install
+# 2. Instale as dependências (só precisa fazer isso uma vez):
+npm install
 
-3. **Inicie o servidor de desenvolvimento:**
-   npm run dev
-
-   *Observação: O servidor iniciará automaticamente no IP 192.168.1.103, permitindo o acesso de outros dispositivos na mesma rede.*
+# 3. Inicie o servidor de desenvolvimento:
+npm run dev

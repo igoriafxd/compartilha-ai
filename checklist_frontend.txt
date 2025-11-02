@@ -58,6 +58,28 @@ O objetivo deste checklist é rastrear a implementação da interface do usuári
 - [x] Corrigir bug de distribuição em itens recém-adicionados.
 
 ---
+## DEPLOY (Concluído)
+- [x] **Configurar Variáveis de Ambiente:** Criar arquivo `.env.production` com a URL da API do Render.
+- [x] **Publicar no Vercel:** Fazer o deploy do frontend para a nuvem.
+- [x] **Corrigir Bug de Produção:** Refatorar `DistributionScreen.jsx` para usar a instância `api` e resolver o erro de "Mixed Content".
+
+---
+## FASE ATUAL: Novas Features de Usabilidade
+
+- [x] **Adicionar Pessoa Dinamicamente:**
+    - [x] Criar o modal `ModalAdicionarPessoa.jsx`.
+    - [x] Adicionar botão e lógica de controle no `DistributionScreen.jsx`.
+    - [x] Integrar com o endpoint da API.
+
+---
 ## PRÓXIMAS FASES (Futuro)
+- [x] **Distribuição por Valor:**
+    - [x] Adicionar no `ModalDistribuir` a opção de alternar entre divisão por "Quantidade" e por "Valor".
+    - [x] Implementar a lógica de seleção de pessoas (checkboxes) para o modo "Valor".
+    - [x] Garantir que a API receba os dados no formato correto para a nova lógica.
+- [ ] **Iniciar Divisão Manualmente:**
+    - [ ] Adicionar botão "Iniciar Manualmente" na tela de Upload.
+    - [ ] Permitir que o fluxo prossiga para a tela de divisão com uma lista de itens vazia.
+- [ ] **Unificar Interface (Baixa Prioridade):** Combinar a tela de upload e a tela de divisão em uma única interface.
 - [ ] **Melhorias de UI/UX:** Adicionar animações, transições e melhorar a responsividade.
 - [ ] **Testes Automatizados:** Escrever testes para garantir que as funções de cálculo não quebrem.

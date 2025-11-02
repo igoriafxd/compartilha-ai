@@ -232,8 +232,9 @@ async def distribuir_item_endpoint(divisao_id: str, request: DistribuirItemReque
     if not item_para_distribuir:
         raise HTTPException(status_code=404, detail="Item não encontrado na divisão.")
 
+    # Usamos uma tolerância (epsilon) para comparar floats, evitando problemas de precisão.
     quantidade_total_distribuida = sum(d.quantidade for d in request.distribuicao)
-    if quantidade_total_distribuida > item_para_distribuir.quantidade:
+    if quantidade_total_distribuida > item_para_distribuir.quantidade + 1e-9:
         raise HTTPException(
             status_code=400,
             detail=f"A quantidade distribuída ({quantidade_total_distribuida}) é maior que a quantidade disponível ({item_para_distribuir.quantidade})."

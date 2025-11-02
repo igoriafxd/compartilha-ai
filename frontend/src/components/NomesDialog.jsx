@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import { UserPlus, Trash2, ArrowRight } from 'lucide-react';
 
 export default function NomesDialog({ onConfirm, onCancel }) {
-  const [nomes, setNomes] = useState(['', '']); // Começa com dois campos
+  const [nomes, setNomes] = useState(['', '']);
 
   const handleNomeChange = (index, value) => {
     const novosNomes = [...nomes];
@@ -14,8 +15,10 @@ export default function NomesDialog({ onConfirm, onCancel }) {
   };
 
   const removerPessoa = (index) => {
-    const novosNomes = nomes.filter((_, i) => i !== index);
-    setNomes(novosNomes);
+    if (nomes.length > 1) {
+      const novosNomes = nomes.filter((_, i) => i !== index);
+      setNomes(novosNomes);
+    }
   };
 
   const handleSubmit = () => {
@@ -28,9 +31,10 @@ export default function NomesDialog({ onConfirm, onCancel }) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50">
-      <div className="bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-md">
-        <h2 className="text-2xl font-bold text-white mb-4">Quem vai dividir a conta?</h2>
+    <div className="fixed inset-0 bg-neutral-800/60 flex items-center justify-center p-4 z-50 font-sans animate-fade-in">
+      <div className="bg-white rounded-2xl shadow-soft p-6 w-full max-w-md">
+        <h2 className="font-display text-2xl font-semibold text-neutral-800 mb-4">Quem vai dividir a conta?</h2>
+        
         <div className="space-y-3 max-h-60 overflow-y-auto pr-2">
           {nomes.map((nome, index) => (
             <div key={index} className="flex items-center space-x-2">
@@ -39,36 +43,40 @@ export default function NomesDialog({ onConfirm, onCancel }) {
                 placeholder={`Pessoa ${index + 1}`}
                 value={nome}
                 onChange={(e) => handleNomeChange(index, e.target.value)}
-                className="w-full bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full border-neutral-200 rounded-xl shadow-sm transition-colors focus:border-primary-500 focus:ring-0"
               />
               <button
                 onClick={() => removerPessoa(index)}
-                className="text-gray-400 hover:text-danger transition-colors"
+                className="text-neutral-400 hover:text-danger transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={nomes.length <= 1}
               >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                <Trash2 size={20} />
               </button>
             </div>
           ))}
         </div>
+
         <button
           onClick={adicionarPessoa}
-          className="w-full mt-4 text-sm text-primary hover:text-blue-400"
+          className="w-full mt-4 flex items-center justify-center gap-2 text-sm text-primary-600 font-semibold hover:text-primary-700 transition-colors"
         >
-          + Adicionar outra pessoa
+          <UserPlus size={16} />
+          Adicionar outra pessoa
         </button>
+
         <div className="flex justify-end space-x-4 mt-6">
           <button
             onClick={onCancel}
-            className="px-4 py-2 rounded-md text-gray-300 hover:bg-gray-700"
+            className="px-5 py-2 rounded-xl text-neutral-600 font-semibold hover:bg-neutral-100 transition-colors"
           >
             Cancelar
           </button>
           <button
             onClick={handleSubmit}
-            className="px-6 py-2 rounded-md bg-primary text-white font-semibold hover:bg-blue-700"
+            className="px-6 py-2 rounded-xl bg-primary-500 text-white font-semibold hover:bg-primary-600 transition-all duration-300 ease-out flex items-center gap-2"
           >
-            Confirmar
+            Confirmar e Iniciar
+            <ArrowRight size={18} />
           </button>
         </div>
       </div>

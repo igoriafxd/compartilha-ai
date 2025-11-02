@@ -1,27 +1,70 @@
-index-CMC-qC0w.js:54 Mixed Content: The page at 'https://compartilha-ai.vercel.app/' was loaded over HTTPS, but requested an insecure resource 'http://192.168.1.103:8001/api/calcular-totais/divisao_d6fe017…'. This request has been blocked; the content must be served over HTTPS.
-(anônimo)	@	index-CMC-qC0w.js:54
-(anônimo)	@	index-CMC-qC0w.js:54
-gn	@	index-CMC-qC0w.js:48
-Lr	@	index-CMC-qC0w.js:48
-He	@	index-CMC-qC0w.js:48
-Lr	@	index-CMC-qC0w.js:48
-He	@	index-CMC-qC0w.js:48
-Lr	@	index-CMC-qC0w.js:48
-He	@	index-CMC-qC0w.js:48
-Lr	@	index-CMC-qC0w.js:48
-fd	@	index-CMC-qC0w.js:48
-(anônimo)	@	index-CMC-qC0w.js:48
-Wt	@	index-CMC-qC0w.js:25
+# Informativo de Desenvolvimento - Compartilha AI
 
-index-CMC-qC0w.js:54 TypeError: Failed to fetch
-    at index-CMC-qC0w.js:54:19590
-    at index-CMC-qC0w.js:54:19800
-    at gn (index-CMC-qC0w.js:48:92664)
-    at Lr (index-CMC-qC0w.js:48:107892)
-    at He (index-CMC-qC0w.js:48:107776)
-    at Lr (index-CMC-qC0w.js:48:107872)
-    at He (index-CMC-qC0w.js:48:107776)
-    at Lr (index-CMC-qC0w.js:48:108658)
-    at He (index-CMC-qC0w.js:48:107776)
-    at Lr (index-CMC-qC0w.js:48:107938)
+Este arquivo serve como um log de decisões e um guia para as próximas etapas de desenvolvimento.
+
+---
+## Funcionalidades Concluídas (Hoje)
+
+### **Distribuição de Itens por Valor**
+- **O que foi feito:** Implementamos a capacidade de dividir itens unitários (como uma porção ou pizza) financeiramente entre várias pessoas.
+- **Como funciona:** No modal de distribuição, o usuário pode alternar para o modo "Por Valor". Em vez de definir quantidades, ele simplesmente seleciona com checkboxes quais pessoas dividirão o item. O sistema então divide o custo total do item igualmente entre todos os selecionados.
+- **Impacto:** Aumenta drasticamente a flexibilidade do app, permitindo o rateio de itens que não são consumidos em unidades discretas.
+
+### **Adicionar Pessoas Dinamicamente**
+- **O que foi feito:** Implementamos a funcionalidade completa para adicionar novas pessoas a uma divisão em andamento.
+- **Como funciona:** Na tela de divisão, ao lado do título "Pessoas", existe um novo botão "+ Adicionar". Ao clicar, um modal aparece, permitindo a inserção do nome da nova pessoa.
+- **Impacto:** Aumenta a flexibilidade, permitindo que o usuário corrija ou adicione participantes sem precisar reiniciar o processo.
+
+---
+## Próximas Etapas Planejadas
+
+A seguir estão as próximas funcionalidades a serem implementadas, em ordem de prioridade.
+
+### **1. Iniciar Divisão Manualmente (Média Prioridade)**
+- **Objetivo:** Permitir que o aplicativo seja usado mesmo sem uma foto da comanda.
+- **Como vai funcionar:**
+    1. A tela inicial terá dois botões: "Escanear Comanda" e "Iniciar Divisão Manual".
+    2. Ao clicar em "Iniciar Manual", o usuário irá para a tela de inserir nomes.
+    3. Após inserir os nomes, ele cairá na tela de divisão, que estará vazia.
+    4. O usuário poderá então usar o botão "+ Adicionar Item" para construir a conta manualmente.
+
+### **2. Unificar Interface (Baixa Prioridade)**
+- **Objetivo:** Simplificar o fluxo do usuário, removendo a tela de upload inicial e unificando tudo na tela de divisão.
+- **Como vai funcionar:**
+    1. A primeira tela do app já será a tela de divisão.
+    2. Ela aparecerá em um "estado inicial", com botões claros para "Escanear Comanda" ou "Adicionar Itens Manualmente".
+    3. Isso torna a experiência mais fluida e direta.
+
+---
+*Este documento será atualizado conforme o progresso for feito.*
+
+
+
+
+problemas:
+SummaryScreen.jsx:77 Uncaught TypeError: Cannot read properties of undefined (reading 'pessoas')
+    at SummaryScreen.jsx:77:48
+    at Array.forEach (<anonymous>)
+    at SummaryScreen.jsx:76:26
+    at Array.forEach (<anonymous>)
+    at createDetailedShareText (SummaryScreen.jsx:71:26)
+    at createShareText (SummaryScreen.jsx:43:14)
+    at handleShare (SummaryScreen.jsx:106:23)
+    at onClick (SummaryScreen.jsx:23:28)
+(anônimo)	@	SummaryScreen.jsx:77
+(anônimo)	@	SummaryScreen.jsx:76
+createDetailedShareText	@	SummaryScreen.jsx:71
+createShareText	@	SummaryScreen.jsx:43
+handleShare	@	SummaryScreen.jsx:106
+onClick	@	SummaryScreen.jsx:23
+<button>		
+ShareModal	@	SummaryScreen.jsx:22
+<ShareModal>		
+SummaryScreen	@	SummaryScreen.jsx:138
+<SummaryScreen>		
+App	@	App.jsx:67
+<App>		
+(anônimo)	@	main.jsx:8
+
 ﻿
+

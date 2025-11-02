@@ -34,6 +34,19 @@ O objetivo deste checklist é rastrear as funcionalidades implementadas no servi
 - [x] Distribuir todos os custos e benefícios (taxa, desconto) de forma proporcional ao consumo de cada pessoa.
 
 ---
+## DEPLOY (Concluído)
+- [x] **Configurar CORS:** Permitir acesso do frontend (Vercel).
+- [x] **Criar `requirements.txt`:** Listar todas as dependências do projeto.
+- [x] **Criar `Procfile`:** Definir o comando para o Render iniciar o servidor.
+- [x] **Publicar no Render:** Fazer o deploy da API para a nuvem.
+
+---
+## FASE ATUAL: Novas Features de Usabilidade
+
+- [x] **Adicionar Pessoa Dinamicamente:** Endpoint (`POST /api/divisao/{divisao_id}/pessoa`) já existia e foi validado.
+
+---
 ## PRÓXIMAS FASES (Futuro)
+- [x] **Distribuição por Valor:** Adaptar a lógica de distribuição para aceitar divisões fracionadas de um item.
 - [ ] **Persistência de Dados:** Salvar as divisões em um banco de dados para que não se percam.
 - [ ] **Autenticação:** Adicionar um sistema de login se o app se tornar multi-usuário.
