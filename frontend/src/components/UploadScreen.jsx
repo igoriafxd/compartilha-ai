@@ -46,7 +46,7 @@ export default function UploadScreen({ onScanComplete, onManualStart }) {
       }
     } catch (err) {
       console.error("Erro ao escanear:", err);
-      setError('Erro na API. Verifique o console.');
+      setError('Ocorreu um erro ao processar. Tente novamente ou inicie a divisão manualmente.');
       setIsLoading(false);
     }
   };
@@ -77,7 +77,7 @@ export default function UploadScreen({ onScanComplete, onManualStart }) {
                 <p className="text-sm text-neutral-500">PNG, JPG, WEBP (MAX. 10MB)</p>
               </div>
             )}
-            <input id="file-upload" type="file" className="hidden" onChange={handleFileChange} accept="image/png, image/jpeg, image/webp" />
+            <input id="file-upload" type="file" className="hidden" onChange={handleFileChange} accept="image/png, image/jpeg, image/webp" capture="environment" />
           </label>
 
           {error && <p className="mt-4 text-center text-sm text-danger">{error}</p>}
