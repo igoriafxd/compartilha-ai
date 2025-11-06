@@ -1,5 +1,5 @@
-// src/components/ModalAdicionarPessoa.jsx
 import { useState } from 'react';
+import { X, UserPlus } from 'lucide-react';
 
 export default function ModalAdicionarPessoa({ onConfirm, onCancel }) {
   const [nome, setNome] = useState('');
@@ -15,13 +15,15 @@ export default function ModalAdicionarPessoa({ onConfirm, onCancel }) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">
-      <div className="bg-gray-800 rounded-lg p-8 w-full max-w-md m-4">
+    <div className="fixed inset-0 bg-neutral-800/60 flex items-center justify-center p-4 z-50 font-sans animate-fade-in">
+      <div className="bg-white rounded-2xl shadow-soft p-6 w-full max-w-md">
         <form onSubmit={handleSubmit}>
-          <h2 className="text-2xl font-bold text-white mb-6">Adicionar Nova Pessoa</h2>
+          <h2 className="font-display text-2xl font-semibold text-neutral-800 mb-6">
+            Adicionar Nova Pessoa
+          </h2>
           
-          <div className="mb-4">
-            <label htmlFor="nome" className="block text-sm font-medium text-gray-400 mb-2">
+          <div>
+            <label htmlFor="nome" className="block text-sm font-medium text-neutral-600 mb-1">
               Nome da Pessoa
             </label>
             <input
@@ -32,27 +34,27 @@ export default function ModalAdicionarPessoa({ onConfirm, onCancel }) {
                 setNome(e.target.value);
                 setError('');
               }}
-              className="w-full bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white focus:ring-primary focus:border-primary"
+              className="w-full mt-1 bg-neutral-50 border border-neutral-300 rounded-xl px-4 py-2 text-neutral-800 focus:ring-2 focus:ring-primary-300 focus:border-primary-500 transition"
               placeholder="Ex: João"
               autoFocus
             />
           </div>
 
-          {error && <p className="text-danger text-sm mb-4">{error}</p>}
+          {error && <p className="text-danger text-sm mt-2">{error}</p>}
 
           <div className="flex justify-end gap-4 mt-8">
             <button
               type="button"
               onClick={onCancel}
-              className="px-4 py-2 rounded-md text-gray-300 bg-gray-700 hover:bg-gray-600"
+              className="px-5 py-2 rounded-xl text-neutral-600 font-semibold hover:bg-neutral-100 transition-colors flex items-center gap-2"
             >
-              Cancelar
+              <X size={18} /> Cancelar
             </button>
             <button
               type="submit"
-              className="px-4 py-2 rounded-md text-white bg-primary hover:bg-blue-700"
+              className="px-6 py-2 rounded-xl bg-primary-500 text-white font-semibold hover:bg-primary-600 transition-all flex items-center gap-2"
             >
-              Adicionar Pessoa
+              <UserPlus size={18} /> Adicionar
             </button>
           </div>
         </form>

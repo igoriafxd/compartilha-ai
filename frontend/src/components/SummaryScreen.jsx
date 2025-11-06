@@ -106,13 +106,18 @@ export default function SummaryScreen({ totais, divisionData, onReset, onGoBack 
     setShareModalOpen(false);
     const shareText = createShareText(type);
     
-    if (navigator.share) {
+    // Detecta se é um dispositivo móvel
+    const isMobile = /Mobi/i.test(window.navigator.userAgent);
+
+    if (isMobile && navigator.share) {
+      // API de compartilhamento nativo para mobile
       navigator.share({
         title: 'Resumo da Conta',
         text: shareText,
       }).catch(console.error);
     } else {
-      const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+      // Fallback para WhatsApp Web no desktop
+      const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
       window.open(whatsappUrl, '_blank');
     }
   };
